@@ -8,6 +8,33 @@ import Home from "@/pages/Home"
 import Login from "@/pages/Login"
 import Search from "@/pages/Search"
 import Register from "@/pages/Register"
+//import { push } from 'core-js/core/array';
+//import { compile } from 'vue/types/umd';
+//先把VueRRouter原型对象的push保存一份
+let orginPush =  VueRouter.prototype.push;
+let orginReplace = VueRouter.prototype.replace;
+
+//重写push|replace方法
+//第一个参数:告诉原来的push方法:你往哪里跳转(依赖哪些参数)
+//第二个参数:成功的回调
+//第三个参数:失败的回调
+VueRouter.prototype.push = function(location,resolve,reject){
+    if(resolve && reject){
+        //call||apply的区别,都可以调用函数一次,都可以篡改上下文一次
+        //call与apply传递参数,call传递参数用逗号隔开,apply方法执行,传递数组
+        orginPush.call(this,location,resolve,reject)
+    }else{
+        orginPush.call(this,location,()=>{},()=>{})
+    }
+}
+VueRouter.prototype.replace = function(location,resole,redirect){
+    if(resolve && reject){
+        orginReplace.call(this,location,resole,redirect)
+    }else{
+        orginReplace.call(this,location,()=>{},()=>{})
+    }
+}
+console.log(orginPush);
 //配置路由
 export default new VueRouter({
     //配置路由

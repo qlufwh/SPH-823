@@ -1,11 +1,34 @@
 <template lang="">
     <div>
-        我是首页
+        <!-- 三级联动全局组件 :三级联动已经注册为全局组件,因此不需要再引入-->
+        <TypeNav></TypeNav>
+        <LisContainer></LisContainer>
+        <Recommend></Recommend>
+        <Rank></Rank>
+        <Like></Like>
+        <Floor></Floor>
+        <Floor></Floor>
+        <Brand></Brand>
     </div>
 </template>
 <script>
+//引入其余的组件
+import LisContainer from "@/pages/Home/ListContainer";
+import Recommend from "@/pages/Home/Recommend";
+import Rank from "@/pages/Home/Rank"
+import Like from "@/pages/Home/Like"
+import Floor from "@/pages/Home/Floor"
+import Brand from "@/pages/Home/Brand"
+
 export default {
-    
+    components:{
+        LisContainer,
+        Recommend,
+        Rank,
+        Like,
+        Floor,
+        Brand
+    }
 }
 </script>
 <style lang="">
